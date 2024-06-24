@@ -15,7 +15,7 @@ const musicaFocoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3') // exportando a música no JS
 musica.loop = true // repete a música infinitas vezes
 
-let tempoDecorridoEmSegundos = 15;
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null
 
 const musicaIniciar =  new Audio('/sons/play.wav');
