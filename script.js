@@ -15,12 +15,12 @@ const musicaFocoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3') // exportando a música no JS
 musica.loop = true // repete a música infinitas vezes
 
-let tempoDecorridoEmSegundos = 1500;
+let tempoDecorridoEmSegundos = 15;
 let intervaloId = null
 
-const musicaIniciar =  new Audio('/sons/play.wav')
-const musicaPausar = new Audio('/sons/pause.mp3')
-const musicaFinalizar =  new Audio('/sons/beep.mp3')
+const musicaIniciar =  new Audio('/sons/play.wav');
+const musicaPausar = new Audio('/sons/pause.mp3');
+const musicaFinalizar =  new Audio('/sons/beep.mp3');
 
 musicaFocoInput.addEventListener('change', () => { // condicão para caso a música estiver pausada ele vai tocar ou pausar
   if(musica.paused) {
@@ -84,6 +84,12 @@ const contagemRegressiva = () => { // vai diminuindo de 1 em 1 segundo a cada lo
   if(tempoDecorridoEmSegundos <= 0) { // se o tempo chegar a zero, ele finaliza a repetição
     musicaFinalizar.play();
     alert('Tempo finalizado!');
+    const focoAtivo = html.getAttribute('data-contexto') == 'foco' // se eu estou com o foco ativo, ai sim podemos dizer que a tarefa foi
+    // finalizada
+    if(focoAtivo) {
+      const evento = new CustomEvent('FocoFinalizado') // aqui estamos criando um evento personalizado
+      document.dispatchEvent(evento) // disparando o evento de focoFinalizado
+    }
     zerar();
     return
   }
